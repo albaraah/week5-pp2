@@ -6,9 +6,27 @@ const JobPage = () => {
   const [job, setJob] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchJob = async () => {
+      try {
+        const res = await fetch(`${"/api/jobs"}/${id}`);
+        const data = await res.json();
+        setJob(data);
+        console.log("YIPPEEE", data);
+
+
+      }catch (error) {
+        console.error("Error fetching a job", error.message);
+      }
+    }
+
+    fetchJob();
+  }, [id]);
+
   const deleteJob = async () => {
     console.log(JobPage);
   };
+
 
   if (!job) {
     return <div>Loading...</div>;
