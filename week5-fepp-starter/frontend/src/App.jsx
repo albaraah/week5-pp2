@@ -9,27 +9,30 @@ import JobPage from "./pages/JobPage";
 import EditJobPage from "./pages/EditJobPage";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import JobsByType from "./pages/JobsByType";
 
 
 const App = () => {
   return (
 
-      <div className="App">
-        <BrowserRouter>
-          <Navbar />
-          <div className="content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/add-job" element={<AddJobPage />} />
-              <Route path="/jobs/:id" element={<JobPage />} />
-              <Route path="/edit-job/:id" element={<EditJobPage />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </div>
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/add-job" element={<AddJobPage />} />
+            <Route path="/jobs/:id" element={<JobPage />} />
+            <Route path="/edit-job/:id" element={<EditJobPage />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path="/jobs/type" element={<JobsByType />} />
+
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
 
   );
 };
