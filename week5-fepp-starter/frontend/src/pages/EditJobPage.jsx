@@ -42,13 +42,38 @@ const EditJobPage = () => {
     fetchJob();
   }, [id]);
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
-    console.log("EditJobPage");
+    //console.log("EditJobPage");
+
+    const updatedJob = {
+      title,
+      type,
+      description,
+      company: { name: companyName, contactEmail, contactPhone },
+      location,
+      salary,
+    };
+
+    try {
+      const res = await fetch(`/api/jobs/${id}`, {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(updatedJob),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to update job")
+      }
+      console.log("updated job")
+      navigate("/");
+    } catch (error) {
+      console.error("Error updating job", error)
+    }
   };
 
   const cancelEdit = () => {
     console.log("cancelEdit");
+    navigate(`/jobs/${id}`);
   };
 
   return (
