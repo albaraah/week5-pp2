@@ -15,10 +15,10 @@ const jobSchema = new mongoose.Schema({
 });
 
 //add  virtual field id
-jobSchema.set("toJSON", {
-  virtuals: true,
-  transform: (doc, ret) => {
-    ret.id = ret._id;
+jobSchema.set("toJSON", { //customizes how a mongo doc is converted to json when you send it back from API
+  virtuals: true, // keeps virtual fields 
+  transform: (doc, ret) => { //modify object
+    ret.id = ret._id; //makes id more readable
     return ret;
   },
 });

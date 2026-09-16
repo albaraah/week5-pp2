@@ -8,9 +8,9 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      "/api": {
-        target: "http://localhost:4000",
-        changeOrigin: true,
+      "/api": { //matches request path with /api
+        target: "http://localhost:4000", // where to send
+        changeOrigin: true, // talks to the middleman
       },
     },
   },

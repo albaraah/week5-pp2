@@ -7,7 +7,8 @@ const connectDB = require("./config/db");
 const cors = require("cors");
 
 // Middlewares
-app.use(cors())
+// CORS = cross-origin resource sharing
+app.use(cors()) //node.js middleware package
 app.use(express.json());
 
 connectDB();
