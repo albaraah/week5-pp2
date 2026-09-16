@@ -7,18 +7,48 @@ const AddJobPage = () => {
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [salary, setSalary] = useState(4500);
-  const [companyName, setCompanyName] = useState("");
+  const [name, setCompanyName] = useState("");// We changed companyName to name because it waasn't working
   const [contactEmail, setContactEmail] = useState("");
   const [contactPhone, setContactPhone] = useState("");
 
   const navigate = useNavigate();
 
-  const submitForm = (e) => {
-    e.preventDefault();
-    console.log("AddJobPage");
+  const job = {
+    title,
+    type,
+    description,
+    company:
+    {
+      name,
+      contactEmail,
+      contactPhone,
+    },
+    location,
+    salary
   };
 
-  return (
+  const submitForm = async (e) => {
+    e.preventDefault();
+      try {
+        const response = await fetch("/api/jobs", {
+          method: "POST",
+          body: JSON.stringify(job),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        if (!response.ok) {
+          throw new Error("Failed to add a new job");
+        }
+        const json = await response.json()
+        console.log("New Job added");
+        navigate("/")
+      } catch (error) {
+        console.error("Error adding job:", error.message);
+      }
+  };
+
+ return (
     <div className="create">
       <h2>Add a New Job</h2>
       <form onSubmit={submitForm}>
@@ -52,7 +82,7 @@ const AddJobPage = () => {
         <input
           id="companyName"
           type="text"
-          value={companyName}
+          value={name}
           onChange={(e) => setCompanyName(e.target.value)}
         />
         <label htmlFor="contactEmail">Contact Email:</label>
